@@ -1,0 +1,5 @@
+---
+- name: Get host kernel
+  command: uname -a
+  register: uname
+- debug: var=uname.stdout_lines

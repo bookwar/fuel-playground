@@ -1,0 +1,5 @@
+---
+- name: Get hosts info
+  hosts: all
+  roles:
+    - stats
