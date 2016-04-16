@@ -1,5 +1,5 @@
 ---
-- name: Get hosts info
-  hosts: all
+- name: Install Fuel
+  hosts: fuel-node
   roles:
-    - stats
+    - fuel

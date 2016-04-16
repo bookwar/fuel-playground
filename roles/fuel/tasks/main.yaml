@@ -1,0 +1,32 @@
+---
+
+- name: Switch SELinux to permissive mode for rabbitmq
+  selinux: policy=targeted state=permissive
+
+- include: repos.yaml
+
+- include: packages.yaml
+
+- include: cobbler_workarounds.yaml
+  tags:
+    - initial
+
+- name: Create /etc/fuel/ for astute.yaml
+  file: path=/etc/fuel state=directory mode=0755
+
+- name: Setup astute.yaml
+  template:
+    src: ../templates/astute.yaml.j2
+    dest: /etc/fuel/astute.yaml
+    owner: root
+    group: root
+    mode: 0644
+
+- include: puppet.yaml
+
+- include: bootstrap.yaml
+  tags:
+    - bootstrap
+
+- name: Create /var/www/nailgun/targetimages/ for fa_build_image
+  file: path=/var/www/nailgun/targetimages/ state=directory mode=0755

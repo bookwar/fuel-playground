@@ -1,0 +1,5 @@
+---
+
+- name: Puppet magic via tasks
+  command: puppet apply -d -v "{{ puppet_path }}{{ item }}.pp" --logdest "/root/puppet.{{ item }}.log"
+  with_items: "{{ puppet_tasks }}"

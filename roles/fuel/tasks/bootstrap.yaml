@@ -1,0 +1,6 @@
+---
+
+- name: Build bootstrap image
+  command: fuel-bootstrap -v --debug build --activate
+  args:
+    creates: /var/www/nailgun/bootstraps/active_bootstrap/metadata.yaml

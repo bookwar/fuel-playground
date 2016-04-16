@@ -1,0 +1,7 @@
+---
+
+- name: Install Fuel packages
+  yum: name=fuel-library10.0,fuel-utils,fuel-ui state=present
+
+- name: Install required packages
+  yum: name=puppet,sysstat state=present

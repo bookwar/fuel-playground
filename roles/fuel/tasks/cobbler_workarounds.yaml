@@ -1,0 +1,13 @@
+---
+
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/ state=directory mode=0755
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/linux state=touch mode=0755
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/initrd.gz state=touch mode=0755
+
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub state=directory mode=0755
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/vmlinuz state=touch mode=0755
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/initrd.img state=touch mode=0755
+- file:
+    src: /var/www/nailgun/bootstraps/bootstrap_stub
+    dest: /var/www/nailgun/bootstraps/active_bootstrap
+    state: link
