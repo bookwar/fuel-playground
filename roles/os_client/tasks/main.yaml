@@ -1,0 +1,12 @@
+---
+
+- include: network.yaml
+  with_dict: "{{ fuel_networks }}"
+  tags:
+    - networks
+
+- include: router.yaml
+  tags:
+    - router
+
+- include: nodes.yaml

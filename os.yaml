@@ -1,0 +1,14 @@
+---
+
+- name: Configure OpenStack
+  hosts: os-manager
+  environment:
+    OS_AUTH_URL: "{{ lookup('env', 'OS_AUTH_URL') }}"
+    OS_TENANT_ID: "{{ lookup('env', 'OS_TENANT_ID') }}"
+    OS_TENANT_NAME: "{{ lookup('env', 'OS_TENANT_NAME') }}"
+    OS_USERNAME: "{{ lookup('env', 'OS_USERNAME') }}"
+    OS_PASSWORD: "{{ lookup('env', 'OS_PASSWORD') }}"
+    OS_REGION_NAME: "{{ lookup('env', 'OS_REGION_NAME') }}"
+
+  roles:
+    - os_client

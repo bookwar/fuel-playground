@@ -1,0 +1,31 @@
+fuel_networks:
+  public:
+    name: fuel_public
+    subnet_name: routed-130
+    subnet_range: 192.168.130.0/24
+    subnet_enable_dhcp: true
+  pxe:
+    name: fuel_pxe
+    subnet_name: routed-140
+    subnet_range: 192.168.140.0/24
+  mgmt:
+    name: fuel_mgmt
+    subnet_name: routed-141
+    subnet_range: 192.168.141.0/24
+  storage:
+    name: fuel_storage
+    subnet_name: routed-142
+    subnet_range: 192.168.142.0/24
+  private:
+    name: fuel_private
+    subnet_name: routed-143
+    subnet_range: 192.168.143.0/24
+
+external_network: public
+fuel_router: fuel-area
+
+fuel_admin_node:
+  name: fuel-node
+  image: pub-c7-64v1.qcow2
+  floating_ip: 172.18.184.191
+  secgroup: open

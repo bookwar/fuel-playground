@@ -1,0 +1,20 @@
+---
+
+- name: Create admin node
+  command: >-
+    nova boot
+    --flavor m1.medium
+    --image {{ fuel_admin_node.image }}
+    --nic net-name=fuel_pxe
+    --nic net-name=fuel_public
+    --security-group open
+    --key-name workstation
+    fuel-node
+
+- name: Open admin node
+  command: nova add-secgroup {{fuel_admin_node.name}} {{fuel_admin_node.secgroup}}
+
+- name: "FIXME: Assign floating IP"
+  command: >-
+    nova floating-ip-associate fuel-node {{fuel_admin_node.floating_ip}}
+    --fixed-address 192.168.130.2

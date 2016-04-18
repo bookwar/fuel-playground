@@ -1,0 +1,10 @@
+---
+
+- name: Create network
+  command: neutron net-create "{{item.value.name}}"
+
+- name: Create subnet
+  command: >-
+    neutron subnet-create {{item.value.name}} {{item.value.subnet_range}}
+    --name {{item.value.subnet_name}}
+    {{ item.value.subnet_enable_dhcp | default(false) | ternary('--enable-dhcp','--disable-dhcp') }}

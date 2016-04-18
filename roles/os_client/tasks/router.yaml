@@ -1,0 +1,10 @@
+---
+
+- name: Create router
+  command: neutron router-create {{fuel_router}}
+
+- name: Add gateway to external network
+  command: neutron router-gateway-set {{fuel_router}} {{ external_network }}
+
+- name: Add interface to fuel public network
+  command: neutron router-interface-add {{fuel_router}} {{fuel_networks.public.subnet_name}}
