@@ -9,12 +9,13 @@
     --nic net-name=fuel_pxe
     --security-group open
     --key-name {{ fuel_admin_node.key }}
-    fuel-node
+    {{ fuel_admin_node.name }}
 
 - name: Open admin node
   command: nova add-secgroup {{fuel_admin_node.name}} {{fuel_admin_node.secgroup}}
 
 - name: "FIXME: Assign floating IP"
   command: >-
-    nova floating-ip-associate fuel-node {{fuel_admin_node.floating_ip}}
-    --fixed-address {{ fuel_admin_node.fixed_ip }}
+    nova floating-ip-associate
+    {{fuel_admin_node.name}}
+    {{fuel_admin_node.floating_ip}}
