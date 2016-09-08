@@ -1,0 +1,13 @@
+---
+
+- name: Create secgroup
+  command: nova secgroup-create {{fuel_admin_node.secgroup}} "Group for admin node"
+
+- name: Allow ssh access for Fuel admin node
+  command: nova secgroup-add-rule {{fuel_admin_node.secgroup}} tcp 22 22 0.0.0.0/0
+
+- name: Allow HTTP access for Fuel admin node
+  command: nova secgroup-add-rule {{fuel_admin_node.secgroup}} tcp 80 80 0.0.0.0/0
+
+- name: Allow HTTPS access for Fuel admin node
+  command: nova secgroup-add-rule {{fuel_admin_node.secgroup}} tcp 443 443 0.0.0.0/0

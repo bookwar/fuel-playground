@@ -1,12 +1,18 @@
 ---
 
-- include: network.yaml
+- name: "setup secgroup"
+  include: security.yaml
+
+- name: "create networks"
+  include: network.yaml
   with_dict: "{{ fuel_networks }}"
   tags:
     - networks
 
-- include: router.yaml
+- name: "create router"
+  include: router.yaml
   tags:
     - router
 
-- include: nodes.yaml
+- name: "create nodes"
+  include: nodes.yaml
