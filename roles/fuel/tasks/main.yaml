@@ -3,30 +3,51 @@
 - name: Switch SELinux to permissive mode for rabbitmq
   selinux: policy=targeted state=permissive
 
-- include: repos.yaml
+- name: Set global DNS server
+  replace: dest=/etc/resolv.conf regexp='^nameserver.*$' replace='nameserver 8.8.8.8'
 
-- include: packages.yaml
+- name: Install fuel release
+  yum: name={{fuel_release.url}} state=present
 
-- include: cobbler_workarounds.yaml
-  tags:
-    - initial
+- name: Install Yum Priorities plugin
+  yum: name=yum-plugin-priorities state=present
 
-- name: Create /etc/fuel/ for astute.yaml
-  file: path=/etc/fuel state=directory mode=0755
+- include_vars: rpm_repos.yaml
 
-- name: Setup astute.yaml
-  template:
-    src: ../templates/astute.yaml.j2
-    dest: /etc/fuel/astute.yaml
-    owner: root
-    group: root
-    mode: 0644
+- name: Setup repositories
+  include: repo.yaml
+  with_items: '{{ rpm_repos }}'
 
-- include: puppet.yaml
+- name: Upload deb repos configuration
+  copy: src=deb_repos.yaml dest=/root/default_deb_repos.yaml
 
-- include: bootstrap.yaml
-  tags:
-    - bootstrap
+- name: Install Fuel Setup
+  yum: name=fuel-setup state=present disable_gpg_check=yes
 
-- name: Create /var/www/nailgun/targetimages/ for fa_build_image
-  file: path=/var/www/nailgun/targetimages/ state=directory mode=0755
+- name: Install Fuel packages
+  yum: name=fuel-library10.0,fuel-utils,fuel-ui state=present
+
+- name: Install required packages
+  yum: name=puppet,sysstat state=present
+
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/ state=directory mode=0755
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/linux state=touch mode=0755
+- file: path=/var/www/nailgun/ubuntu/x86_64/images/initrd.gz state=touch mode=0755
+
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub state=directory mode=0755
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/vmlinuz state=touch mode=0755
+- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/initrd.img state=touch mode=0755
+- file:
+    src: /var/www/nailgun/bootstraps/bootstrap_stub
+    dest: /var/www/nailgun/bootstraps/active_bootstrap
+    state: link
+
+
+- name: Puppet magic via tasks
+  command: puppet apply -d -v "{{ puppet_path }}{{ item }}.pp" --logdest "/root/puppet.{{ item }}.log"
+  with_items: "{{ puppet_tasks }}"
+
+- name: Build bootstrap image
+  command: fuel-bootstrap -v --debug build --activate
+  args:
+    creates: /var/www/nailgun/bootstraps/active_bootstrap/metadata.yaml

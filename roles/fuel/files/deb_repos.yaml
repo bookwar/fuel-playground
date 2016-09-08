@@ -1,0 +1,99 @@
+---
+-
+  type: "deb"
+  name: "ubuntu"
+  uri: "http://archive.ubuntu.com/ubuntu"
+  suite: "xenial"
+  section: "main universe multiverse"
+  priority: null
+-
+  type: "deb"
+  name: "ubuntu-updates"
+  uri: "http://archive.ubuntu.com/ubuntu"
+  suite: "xenial-updates"
+  section: "main universe multiverse"
+  priority: null
+-
+  type: "deb"
+  name: "ubuntu-security"
+  uri: "http://archive.ubuntu.com/ubuntu"
+  suite: "xenial-security"
+  section: "main universe multiverse"
+  priority: null
+-
+  type: "deb"
+  name: "mos"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master"
+  section: "main restricted"
+  priority: 1100
+-
+  type: "deb"
+  name: "mos-proposed"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master-proposed"
+  section: "main restricted"
+  priority: 1150
+-
+  type: "deb"
+  name: "mos-updates"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master-updates"
+  section: "main restricted"
+  priority: 1110
+-
+  type: "deb"
+  name: "mos-holdback"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master-holdback"
+  section: "main restricted"
+  priority: 1130
+-
+  type: "deb"
+  name: "mos-hotfix"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master-hotfix"
+  section: "main restricted"
+  priority: 1140
+-
+  type: "deb"
+  name: "mos-security"
+  uri: "http://mirror.seed-cz1.fuel-infra.org/mos-repos/xenial/snapshots/master-2016-09-07-140036"
+  suite: "mos-master-security"
+  section: "main restricted"
+  priority: 1120
+-
+  type: "deb"
+  name: "fuel"
+  uri: "http://packages.fuel-infra.org/repositories/ubuntu/snapshots/master-xenial-2016-09-08-102628"
+  suite: "master-xenial"
+  section: "main restricted"
+  priority: 1200
+-
+  type: "deb"
+  name: "fuel-proposed"
+  uri: "http://packages.fuel-infra.org/repositories/ubuntu/snapshots/master-xenial-2016-09-08-102628"
+  suite: "master-xenial-proposed"
+  section: "main restricted"
+  priority: 1250
+-
+  type: "deb"
+  name: "fuel-updates"
+  uri: "http://packages.fuel-infra.org/repositories/ubuntu/snapshots/master-xenial-2016-09-08-102628"
+  suite: "master-xenial-updates"
+  section: "main restricted"
+  priority: 1210
+-
+  type: "deb"
+  name: "fuel-holdback"
+  uri: "http://packages.fuel-infra.org/repositories/ubuntu/snapshots/master-xenial-2016-09-08-102628"
+  suite: "master-xenial-holdback"
+  section: "main restricted"
+  priority: 1230
+-
+  type: "deb"
+  name: "fuel-security"
+  uri: "http://packages.fuel-infra.org/repositories/ubuntu/snapshots/master-xenial-2016-09-08-102628"
+  suite: "master-xenial-security"
+  section: "main restricted"
+  priority: 1220

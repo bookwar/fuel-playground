@@ -1,6 +1,0 @@
----
-- name: Install Yum Priorities plugin
-  yum: name=yum-plugin-priorities state=present
-
-- name: Install repositories configuration
-  yum: name={{ fuel_release_custom }} state=present

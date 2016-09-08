@@ -28,7 +28,6 @@ fuel_admin_node:
   name: fuel-admin-node
   image: pub-c7-64v2.qcow2
   floating_ip: 172.18.236.234
-  fixed_ip: 192.168.130.3
   secgroup: open
   key: afedorova-work
 

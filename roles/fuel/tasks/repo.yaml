@@ -1,0 +1,8 @@
+---
+
+- name: Install repo
+  yum_repository:
+    name: '{{ item.name }}'
+    description: '{{ item.name }}'
+    priority: '{{ item.priority }}'
+    baseurl: '{{ item.uri }}'
