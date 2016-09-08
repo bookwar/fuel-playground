@@ -8,3 +8,8 @@
 
 - name: Add interface to fuel public network
   command: neutron router-interface-add {{fuel_router}} {{fuel_networks.public.subnet_name}}
+
+- name: Add Google DNS to public network
+  command: >-
+    neutron subnet-update {{fuel_networks.public.subnet_name}}
+    --dns-nameservers list=true 8.8.8.8 8.8.4.4

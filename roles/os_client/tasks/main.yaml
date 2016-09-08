@@ -2,17 +2,15 @@
 
 - name: "setup secgroup"
   include: security.yaml
+  vars:
+    secgroup: "{{fuel_admin_node.secgroup}}"
 
 - name: "create networks"
   include: network.yaml
   with_dict: "{{ fuel_networks }}"
-  tags:
-    - networks
 
 - name: "create router"
   include: router.yaml
-  tags:
-    - router
 
 - name: "create admin node"
   include: admin_node.yaml

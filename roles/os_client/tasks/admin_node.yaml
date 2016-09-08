@@ -5,7 +5,7 @@
     nova boot
     --flavor m1.medium
     --image {{ fuel_admin_node.image }}
-    --nic net-name=fuel_public
+    --nic net-name=fuel_public,v4-fixed-ip={{fuel_admin_node.fixed_ip}}
     --nic net-name=fuel_pxe
     --security-group open
     --key-name {{ fuel_admin_node.key }}
@@ -19,3 +19,4 @@
     nova floating-ip-associate
     {{fuel_admin_node.name}}
     {{fuel_admin_node.floating_ip}}
+    --fixed-address {{fuel_admin_node.fixed_ip}}
