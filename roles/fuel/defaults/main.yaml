@@ -1,19 +1,17 @@
 ---
 
-fuel_release_custom: http://packages.fuel-infra.org/review/FUEL-306751/repositories/centos/master-centos7/os/x86_64/Packages/fuel-release-10.0.0-1.mos6340.git.6d77b3c.noarch.rpm
-
 network_settings_yaml: |
   "HOSTNAME": "fuel"
   "DNS_DOMAIN": "localdomain"
-  "DNS_SEARCH": "routed-125"
-  "DNS_UPSTREAM": "192.168.125.1"
+  "DNS_SEARCH": "routed-130"
+  "DNS_UPSTREAM": "192.168.130.1"
   "ADMIN_NETWORK":
     "interface": "eth1"
-    "ipaddress": "192.168.140.100"
+    "ipaddress": "192.168.140.2"
     "netmask": "255.255.255.0"
     "cidr": "192.168.140.0/24"
     "size": "256"
-    "dhcp_gateway": "192.168.140.100"
+    "dhcp_gateway": "192.168.140.2"
     "dhcp_pool_start": "192.168.140.101"
     "dhcp_pool_end": "192.168.140.254"
     "ssh_network": "192.168.0.0/16"

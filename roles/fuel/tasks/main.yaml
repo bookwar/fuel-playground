@@ -3,45 +3,33 @@
 - name: Switch SELinux to permissive mode for rabbitmq
   selinux: policy=targeted state=permissive
 
-- name: Set global DNS server
-  replace: dest=/etc/resolv.conf regexp='^nameserver.*$' replace='nameserver 8.8.8.8'
-
-- name: Install fuel release
-  yum: name={{fuel_release.url}} state=present
-
 - name: Install Yum Priorities plugin
   yum: name=yum-plugin-priorities state=present
 
-- include_vars: rpm_repos.yaml
-
-- name: Setup repositories
-  include: repo.yaml
+- name: Setup RPM repo
+  yum_repository:
+    name: '{{ item.name }}'
+    description: '{{ item.name }}'
+    priority: '{{ item.priority }}'
+    baseurl: '{{ item.uri }}'
+    gpgcheck: 'no'
   with_items: '{{ rpm_repos }}'
 
-- name: Upload deb repos configuration
-  copy: src=deb_repos.yaml dest=/root/default_deb_repos.yaml
+- name: Install packages
+  include: packages.yaml
 
-- name: Install Fuel Setup
-  yum: name=fuel-setup state=present disable_gpg_check=yes
+- name: Create /etc/fuel/ for astute.yaml
+  file: path=/etc/fuel state=directory mode=0755
 
-- name: Install Fuel packages
-  yum: name=fuel-library10.0,fuel-utils,fuel-ui state=present
+- name: Setup astute.yaml
+  template:
+    src: ../templates/astute.yaml.j2
+    dest: /etc/fuel/astute.yaml
+    owner: root
+    group: root
+    mode: 0644
 
-- name: Install required packages
-  yum: name=puppet,sysstat state=present
-
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/ state=directory mode=0755
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/linux state=touch mode=0755
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/initrd.gz state=touch mode=0755
-
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub state=directory mode=0755
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/vmlinuz state=touch mode=0755
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/initrd.img state=touch mode=0755
-- file:
-    src: /var/www/nailgun/bootstraps/bootstrap_stub
-    dest: /var/www/nailgun/bootstraps/active_bootstrap
-    state: link
-
+- include: cobbler_workarounds.yaml
 
 - name: Puppet magic via tasks
   command: puppet apply -d -v "{{ puppet_path }}{{ item }}.pp" --logdest "/root/puppet.{{ item }}.log"

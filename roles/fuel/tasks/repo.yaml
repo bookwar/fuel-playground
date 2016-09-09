@@ -6,3 +6,4 @@
     description: '{{ item.name }}'
     priority: '{{ item.priority }}'
     baseurl: '{{ item.uri }}'
+    gpgcheck: 'no'
