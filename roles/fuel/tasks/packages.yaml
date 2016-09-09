@@ -7,4 +7,7 @@
   yum: name=fuel-library10.0,fuel-utils,fuel-ui state=present
 
 - name: Install required packages
-  yum: name=puppet,sysstat,gdisk state=present
+  yum: name={{ required_packages }} state=present
+
+- name: Install other packages
+  yum: name={{ other_packages }} state=present

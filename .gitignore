@@ -1,4 +1,6 @@
 *~
 hosts
-openrc.sh
+*openrc.sh
 *.retry
+\#*
+\.*

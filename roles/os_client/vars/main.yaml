@@ -25,10 +25,11 @@ external_network: ext_float
 fuel_router: fuel-area
 
 fuel_admin_node:
-  name: fuel-admin-node
+  name: fuel
   image: pub-c7-64v2.qcow2
   floating_ip: 172.18.236.234
   fixed_ip: 192.168.130.3
+  fixed_pxe_ip: 192.168.140.2
   secgroup: open
   key: afedorova-work
 

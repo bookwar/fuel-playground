@@ -17,4 +17,4 @@
 
 - name: "create nodes"
   include: node.yaml
-  with_sequence: start=1 end={{fuel_node.number}} format=fuel-node%02x
+  with_sequence: start=1 end={{fuel_node.number}} format=node%02x

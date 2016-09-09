@@ -5,8 +5,8 @@
     nova boot
     --flavor m1.medium
     --image {{ fuel_node.image }}
-    --nic net-name=fuel_public
     --nic net-name=fuel_pxe
+    --nic net-name=fuel_public
     --nic net-name=fuel_mgmt
     --nic net-name=fuel_storage
     --nic net-name=fuel_private

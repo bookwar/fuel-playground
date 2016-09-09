@@ -1,0 +1,5 @@
+---
+- name: Install Fuel
+  hosts: fuel-node
+  roles:
+    - fuel

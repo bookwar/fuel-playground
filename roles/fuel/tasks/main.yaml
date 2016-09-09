@@ -1,6 +1,9 @@
 ---
 
-- name: Switch SELinux to permissive mode for rabbitmq
+- name: Set IP address on second interface
+  command: 'ip addr add 192.168.140.2 dev eth1'
+
+- name: Switch SELinux to permissive mode (needed by rabbitmq)
   selinux: policy=targeted state=permissive
 
 - name: Install Yum Priorities plugin
@@ -18,6 +21,9 @@
 - name: Install packages
   include: packages.yaml
 
+- name: Apply cobbler workarounds
+  include: cobbler_workarounds.yaml
+
 - name: Create /etc/fuel/ for astute.yaml
   file: path=/etc/fuel state=directory mode=0755
 
@@ -29,9 +35,7 @@
     group: root
     mode: 0644
 
-- include: cobbler_workarounds.yaml
-
-- name: Puppet magic via tasks
+- name: Apply puppet task
   command: puppet apply -d -v "{{ puppet_path }}{{ item }}.pp" --logdest "/root/puppet.{{ item }}.log"
   with_items: "{{ puppet_tasks }}"
 
