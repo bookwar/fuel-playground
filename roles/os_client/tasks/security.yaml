@@ -3,11 +3,8 @@
 - name: Create security group
   command: nova secgroup-create {{secgroup}} "Open security group"
 
-- name: Allow SSH access for security group
-  command: nova secgroup-add-rule {{secgroup}} tcp 22 22 0.0.0.0/0
-
-- name: Allow HTTP access for security group
-  command: nova secgroup-add-rule {{secgroup}} tcp 80 80 0.0.0.0/0
-
-- name: Allow HTTPS access for security group
-  command: nova secgroup-add-rule {{secgroup}} tcp 443 443 0.0.0.0/0
+- name: Allow port access for security group
+  command: nova secgroup-add-rule {{secgroup}} tcp {{item}} {{item}} 0.0.0.0/0
+  with_items:
+    - 22
+    - 8000
