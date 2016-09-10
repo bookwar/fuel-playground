@@ -1,13 +1,21 @@
 ---
 
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/ state=directory mode=0755
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/linux state=touch mode=0755
-- file: path=/var/www/nailgun/ubuntu/x86_64/images/initrd.gz state=touch mode=0755
+- name: Create cobbler dirs
+  file: path={{ item }} state=directory mode=0755
+  with_items:
+    - /var/www/nailgun/ubuntu/x86_64/images
+    - /var/www/nailgun/bootstraps/bootstrap_stub
 
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub state=directory mode=0755
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/vmlinuz state=touch mode=0755
-- file: path=/var/www/nailgun/bootstraps/bootstrap_stub/initrd.img state=touch mode=0755
-- file:
+- name: Create dummy bootstrap files
+  file: path={{ item }} state=touch mode=0755
+  with_items:
+    - /var/www/nailgun/ubuntu/x86_64/images/linux
+    - /var/www/nailgun/ubuntu/x86_64/images/initrd.gz
+    - /var/www/nailgun/bootstraps/bootstrap_stub/vmlinuz
+    - /var/www/nailgun/bootstraps/bootstrap_stub/initrd.img
+
+- name: Create initial symlink
+  file:
     src: /var/www/nailgun/bootstraps/bootstrap_stub
     dest: /var/www/nailgun/bootstraps/active_bootstrap
     state: link
