@@ -10,4 +10,5 @@
     --nic net-name=fuel_mgmt
     --nic net-name=fuel_storage
     --nic net-name=fuel_private
+    --key-name {{ admin_key.name }}
     {{ item }}

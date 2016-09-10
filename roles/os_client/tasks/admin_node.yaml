@@ -8,7 +8,7 @@
     --nic net-name=fuel_public,v4-fixed-ip={{fuel_admin_node.fixed_ip}}
     --nic net-name=fuel_pxe,v4-fixed-ip={{fuel_admin_node.fixed_pxe_ip}}
     --security-group open
-    --key-name {{ fuel_admin_node.key }}
+    --key-name {{ admin_key.name }}
     {{ fuel_admin_node.name }}
 
 - name: Open admin node

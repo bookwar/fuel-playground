@@ -1,0 +1,7 @@
+---
+
+- name: Setup SSH key file
+  copy: src={{key.src | default("~/.ssh/id_rsa.pub")}} dest=~/{{key.name}}.pub
+
+- name: Upload SSH Key
+  command: nova keypair-add --pub_key ~/{{key.name}}.pub {{key.name}}

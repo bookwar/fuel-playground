@@ -1,5 +1,10 @@
 ---
 
+- name: "setup main ssh key"
+  include: ssh_key.yaml
+  vars:
+    key: "{{ admin_key }}"
+
 - name: "setup secgroup"
   include: security.yaml
   vars:

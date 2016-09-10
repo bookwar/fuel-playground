@@ -31,8 +31,10 @@ fuel_admin_node:
   fixed_ip: 192.168.130.3
   fixed_pxe_ip: 192.168.140.2
   secgroup: open
-  key: afedorova-work
 
 fuel_node:
   number: 5
   image: ubuntu-16.04-server-cloudimg
+
+admin_key:
+  name: fuel_lab_key
