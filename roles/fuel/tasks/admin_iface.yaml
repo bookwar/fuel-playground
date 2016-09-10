@@ -1,0 +1,7 @@
+---
+
+- name: Create ifcfg-eth1 file
+  copy: src=ifcfg-eth1 dest=/etc/sysconfig/network-scripts/ifcfg-eth1
+
+- name: Start the interface
+  command: ifup eth1

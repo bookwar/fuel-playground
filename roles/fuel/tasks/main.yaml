@@ -1,7 +1,7 @@
 ---
 
-- name: Set IP address on second interface
-  command: 'ip addr add 192.168.140.2 dev eth1'
+- name: Setup admin network interface
+  include: admin_iface.yaml
 
 - name: Switch SELinux to permissive mode (needed by rabbitmq)
   selinux: policy=targeted state=permissive
@@ -36,7 +36,7 @@
     mode: 0644
 
 - name: Apply puppet task
-  command: puppet apply -d -v "{{ puppet_path }}{{ item }}.pp" --logdest "/root/puppet.{{ item }}.log"
+  puppet: manifest="{{ puppet_path }}{{ item }}.pp" logdest=syslog
   with_items: "{{ puppet_tasks }}"
 
 - name: Build bootstrap image

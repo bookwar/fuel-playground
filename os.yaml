@@ -1,6 +1,6 @@
 ---
 
-- name: Configure OpenStack
+- name: Configure OpenStack tenant for Fuel
   hosts: os-manager
   environment:
     OS_AUTH_URL: "{{ lookup('env', 'OS_AUTH_URL') }}"
