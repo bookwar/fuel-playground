@@ -1,6 +1,9 @@
 About
 =====
 
+Playbooks below are not safe or idempotent. It is recommended
+to use `ansible-playbook` command with `--step` option.
+
 fuel.yaml
 ---------
 
